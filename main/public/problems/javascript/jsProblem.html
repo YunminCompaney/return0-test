@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Sheet</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="jsStyles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-js.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
+    <script src="jsScript.js"></script>
+</head>
+<body>
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <pre><code class="language-javascript" id="modalCode"></code></pre>
+        </div>
+    </div>
+
+    <header>
+        <h1><strong>2025학년도 구월중학교 코딩동아리 기초학력평가 문제지</strong></h1>
+        <h2>JavaScript(Node.js) 영역</h2>
+    </header>
+
+    <main>
+        <section id="problems">
+            <h2>단답형</h2>
+            <ol>
+                <li>
+                    <p>다음 코드를 보고 물음에 답하시오. (배점: 5점)</p> <button id="src1">소스 1</button>
+                    <p>1-1. 이 코드를 실행하면 result 변수를 불러올 수 없다는 오류가 발생한다. 이유는? (4점)</p>
+                    <select>
+                        <option value="">선택하세요</option>
+                        <option value="1">콘솔에 로그를 출력할 때 따옴표가 아닌 백틱(`)을 사용해서.</option>
+                        <option value="2">'<=' 연산자를 '=<'로 수정하지 않아서.</option>
+                        <option value="3">const로 변수를 선언하면 블록 스코프로 선언되어서.</option>
+                        <option value="4">조건문이 거짓이라서 result 변수가 선언되지 않아서.</option>
+                        <option value="5">result 변수에 느낌표가 있는데 콘솔에 출력할 때에도 느낌표를 붙여서.</option>
+                    </select>
+                    <p>1-2. 문제에 사용된 '<=' 연산자를 설명하세요. (1점)</p>
+                    <input type="text" placeholder="정답을 작성하세요.">
+                </li>
+                <li>
+                    <p>Node.js에서 require 키워드의 역할은 무엇인가요? (배점: 2점)</p>
+                    <select>
+                        <option value="">선택하세요</option>
+                        <option value="a">모듈을 가져오기</option>
+                        <option value="b">모듈을 초기화하기</option>
+                        <option value="c">데이터를 암호화하기</option>
+                        <option value="d">HTTP 요청을 보내기</option>
+                    </select>
+                </li>
+                <li>
+                    <p>다음 코드의 출력 결과를 적으세요. (배점: 2점)</p> <button id="src2">소스 2</button>
+                    <input type="text" placeholder="정답을 작성하세요.">
+                </li>
+                <li>
+                    <p>fs 모듈에서 파일을 동기적으로 읽기 위한 함수의 이름은 무엇인가요? (배점: 4점)</p>
+                    <input type="text" placeholder="정답을 작성하세요.">
+                </li>
+                <li>
+                    <p>Node.js에서 process.env 객체의 주요 용도는 무엇인가요? (배점: 2점)</p>
+                    <select>
+                        <option value="">선택하세요</option>
+                        <option value="a">파일 읽기</option>
+                        <option value="b">환경 변수 관리</option>
+                        <option value="c">데이터 암호화</option>
+                        <option value="d">네트워크 요청 처리</option>
+                    </select>
+                </li>
+                <li>
+                    <p>다음 코드에서 setTimeout의 역할을 한 문장으로 설명하세요. (배점: 4점)</p> <button id="src3">소스 3</button>
+                    <input type="text" placeholder="정답을 작성하세요.">
+                </li>
+                <li>
+                    <p>다음 코드를 실행했을 때의 출력 결과를 순서대로 작성하세요. (배점: 3점)</p> <button id="src4">소스 4</button>
+                    <input type="text" placeholder="정답을 작성하세요.">
+                </li>
+            </ol>
+            <h2>서답형</h2>
+            <ol>
+                <li>
+                    <p>fs 모듈을 사용하여 input.txt 파일을 읽고, 읽은 데이터를 콘솔에 출력하세요.<br>읽는 작업은 비동기 방식으로 처리되어야 합니다.<br>오류가 발생하면 '오류: '라는 메세지와 함께 오류 메세지를 출력하세요. (배점: 5점)</p>
+                    <button class="answer-button" data-question="1">답변 작성</button>
+                </li>
+                <li>
+                    <p>http 모듈을 사용하여 서버를 생성하세요. 서버는 3000번 포트에서 실행되어야 합니다. 클라이언트가 / 경로로 요청을 보낼 경우, "Welcome to Node.js!"라는 메시지를 반환하세요. (배점: 6점)</p>
+                    <button class="answer-button" data-question="2">답변 작성</button>
+                </li>
+            </ol>
+        </section>
+
+        <section id="submit">
+            <button id="submit-button">Submit Answers</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 구월중학교 코딩동아리. All rights reserved.</p>
+    </footer>
+
+    <div id="answerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <textarea id="answerText" rows="10" cols="50"></textarea>
+            <button id="saveAnswer">저장</button>
+        </div>
+    </div>
+</body>
+</html>
