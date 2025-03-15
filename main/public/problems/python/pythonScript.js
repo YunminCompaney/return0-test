@@ -203,6 +203,7 @@ function handleSubmit(event) {
         });
 
         console.log("답안이 제출되었습니다.");
+        window.location.href = '/submitComplete.html';
     }
 }
 

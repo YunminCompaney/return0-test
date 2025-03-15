@@ -10,4 +10,4 @@ y = int(input("Enter the value for y: "))
 
 result = calculation(x, y)
 
-print(f"x : {result[0]}, y: {result[1]}")
+print(f"x : {result[0]}, y : {result[1]}")
