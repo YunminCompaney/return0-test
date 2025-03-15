@@ -1,47 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구월중학교 코딩동아리 프로그래밍 테스트</title>
     <link rel="stylesheet" href="mainPage.css">
     <script src="mainPage.js"></script>
-    <title>구월중학교 코딩동아리 기초학력평가</title>
 </head>
+
 <body>
     <div class="container">
-        <h1>2025학년도 구월중학교 코딩동아리 기초학력평가 문제지</h1>
-        
-        <div class="instructions">
-            <p>안녕하세요! 코딩동아리 기초학력평가에 오신 것을 환영합니다.</p>
-            <p>아래 세 가지 프로그래밍 언어 중 하나를 선택하여 시험을 시작해주세요:</p>
-            <ul>
-                <li>제한시간: 60분</li>
-                <li>문제 수: 3문제</li>
-                <li>모든 문제를 풀 필요는 없으며, 시도한 문제에 대해 평가합니다.</li>
-                <li>배점이 높은 문제를 가장 많이 맞추면 돼</li>
-            </ul>
-        </div>
-        <br>
+        <h1>2025학년도 구월중학교 코딩동아리 기초학력평가</h1>
+        <p class="instructions">아래 프로그래밍 언어 중 하나를 선택하여 시험을 시작해주세요:</p>
         <div class="language-selection">
             <div class="language-card" onclick="selectLanguage('python')">
                 <img src="./assets/images/python-logo.png" alt="Python" class="language-logo">
-                <h3>Python 영역</h3>
+                <h3>Python</h3>
                 <button class="btn">시험 시작</button>
             </div>
-
             <div class="language-card" onclick="selectLanguage('cpp')">
                 <img src="./assets/images/cpp-logo.png" alt="C++" class="language-logo">
-                <h3>C++ 영역</h3>
+                <h3>C++</h3>
                 <button class="btn">시험 시작</button>
             </div>
-
             <div class="language-card" onclick="selectLanguage('javascript')">
                 <img src="./assets/images/javascript-logo.png" alt="JavaScript" class="language-logo">
-                <h3>JavaScript 영역</h3>
+                <h3>JavaScript</h3>
                 <button class="btn">시험 시작</button>
             </div>
         </div>
-
     </div>
 </body>
+
 </html>

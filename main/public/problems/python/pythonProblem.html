@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="kor">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="pythonScript.js"></script>
 </head>
+
 <body>
     <div id="codeModal" class="modal">
         <div class="modal-content">
@@ -70,17 +73,14 @@
                     <li>
                         <p>다음 조건을 충족하는 함수를 작성하세요. (배점: 8점)</p>
                         <p>
-                            1. 두 리스트의 공통 요소를 찾아 반환해야 합니다.<br>
-                            2. 중복 없이 반환해야 합니다.<br>
-                            -----------------------------------------------------------------<br>
-                            # 예: list1 = [1, 2, 2, 3], list2 = [2, 2, 3, 4]<br>
-                            # 반환값: [2, 3]
+                            1. 두 리스트의 공통 요소를 찾아 반환해야 합니다.<br> 2. 중복 없이 반환해야 합니다.<br> -----------------------------------------------------------------
+                            <br> # 예: list1 = [1, 2, 2, 3], list2 = [2, 2, 3, 4]<br> # 반환값: [2, 3]
                         </p>
                         <button class="answer-button" data-question="3">답변 작성</button>
                     </li>
                 </ol>
-                    <h2>서답형 2번 채점 기준</h2>
-                    <ol>
+                <h2>서답형 2번 채점 기준</h2>
+                <ol>
                     <li>
                         (2점) 소수를 정확히 판별하는 코드를 작성했는가?</li>
                     <li>
@@ -89,9 +89,9 @@
                         (1점) 소수의 개수를 올바르게 출력했는가?</li>
                     <li>
                         (1점) 소수가 없는 경우에 대한 처리와 출력이 올바른가?</li>
-                    </ol>
-                    <h2>서답형 3번 체점 기준</h2>
-                    <ol>
+                </ol>
+                <h2>서답형 3번 체점 기준</h2>
+                <ol>
                     <li>
                         함수 정의 및 입력 처리 (2점)
                         <br>
@@ -132,4 +132,5 @@
         </div>
     </div>
 </body>
+
 </html>

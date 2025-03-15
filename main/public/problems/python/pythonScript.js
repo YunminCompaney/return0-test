@@ -1,3 +1,5 @@
+let editor; // CodeMirror 인스턴스를 전역 변수로 선언
+
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById("codeModal");
     const modalCode = document.getElementById("modalCode");
@@ -63,12 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 제출 버튼 클릭 시 알림 표시
     const submitButton = document.getElementById('submit-button');
+    console.log(submitButton); // submitButton 요소가 제대로 선택되었는지 확인
+
     const answerModal = document.getElementById("answerModal");
     const modalTitle = document.getElementById("modalTitle");
     const answerText = document.getElementById("answerText");
     const saveAnswerButton = document.getElementById("saveAnswer");
     const answerCloseSpan = answerModal.querySelector(".close");
-    let editor; // CodeMirror 인스턴스를 전역 변수로 선언
 
     // CodeMirror 인스턴스 생성
     editor = CodeMirror.fromTextArea(answerText, {
@@ -134,32 +137,89 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handleSubmit(event) {
-    event.preventDefault(); // 기본 제출 동작 방지
+    console.log("Submit");
+    event.preventDefault();
+
     const confirmation = confirm("제출하면 답안을 수정하실 수 없습니다. 제출하시겠습니까?");
     if (confirmation) {
-        // 서답형 답안 초기화
-        document.querySelectorAll('.answer-button').forEach(button => {
-            const questionNumber = button.getAttribute('data-question');
-            localStorage.removeItem(`answer${questionNumber}`);
+        // 학번 입력 받기
+        const studentId = prompt("학번을 입력해주세요:");
+        if (!studentId) {
+            alert("학번을 입력해야 제출할 수 있습니다.");
+            return;
+        }
+
+        // 압축 파일 생성
+        const zip = new JSZip();
+
+        // 코드 파일을 저장할 폴더 생성
+        const codeFolder = zip.folder("code");
+
+        // 모든 문제 답안을 하나의 텍스트 파일로 저장
+        let textContent = "📝 시험 답안지\n\n";
+
+        // 객관식 문제 답안 추가
+        textContent += "==== 객관식 문제 ====\n\n";
+        document.querySelectorAll('select').forEach((selectElement, index) => {
+            const selectedAnswer = selectElement.value;
+            const questionText = selectElement.closest('li').querySelector('p').textContent;
+            const answerText = selectElement.options[selectElement.selectedIndex].textContent;
+
+            textContent += `문제 ${index + 1}: ${questionText.trim()}\n`;
+            textContent += `답변: ${selectedAnswer} (${answerText})\n\n`;
         });
 
-        // CodeMirror 에디터 초기화
-        if (editor) {
-            editor.setValue('');
-        }
+        // 단답형 문제 답안 추가 (텍스트 입력 필드)
+        textContent += "==== 단답형 문제 ====\n\n";
+        document.querySelectorAll('input[type="text"]').forEach((inputElement, index) => {
+            const questionText = inputElement.closest('li').querySelector('p').textContent;
+            const answer = inputElement.value;
 
-        // 답변 모달 닫기
-        const answerModal = document.getElementById("answerModal");
-        if (answerModal) {
-            answerModal.style.display = "none";
-        }
+            textContent += `문제 ${index + 1}: ${questionText.trim()}\n`;
+            textContent += `답변: ${answer}\n\n`;
+        });
 
-        // 여기에 제출 로직 추가 (예: 서버로 데이터 전송)
+        // 텍스트 파일을 압축 파일의 루트에 저장
+        zip.file('answers.txt', textContent);
+
+        // 서답형 문제는 별도 파일로 저장
+        document.querySelectorAll('.answer-button').forEach(button => {
+            const questionNumber = button.getAttribute('data-question');
+            const code = localStorage.getItem(`answer${questionNumber}`) || '';
+
+            // 서답형 문제 코드를 code 폴더 안에 저장
+            codeFolder.file(`problem${questionNumber}.py`, code);
+        });
+
+        // 압축 파일 생성 및 다운로드
+        zip.generateAsync({ type: 'blob' }).then((content) => {
+            sendToWebhook(content, studentId);
+
+            // 데이터 처리 후에 localStorage 삭제
+            document.querySelectorAll('.answer-button').forEach(button => {
+                const questionNumber = button.getAttribute('data-question');
+                localStorage.removeItem(`answer${questionNumber}`);
+            });
+        });
+
         console.log("답안이 제출되었습니다.");
-
-        // 제출 후 페이지 새로고침 또는 다른 페이지로 리다이렉트
-        // window.location.reload(); // 페이지 새로고침
-        // window.location.href = "/submission-complete"; // 제출 완료 페이지로 이동
     }
-
 }
+
+const sendToWebhook = async(zipBlob, studentId) => {
+    const formData = new FormData();
+    formData.append('username', 'Submit webhook'); // Webhook 이름
+    formData.append('content', `답안이 제출되었습니다!\n\n학번: **${studentId}**\n응시 언어: **Python**`); // Webhook 내용
+    formData.append('attachment', zipBlob, `${studentId}_answers.zip`); // 파일을 FormData에 추가
+
+    const response = await fetch('https://discord.com/api/webhooks/1350488946450239600/gJUPOl8M7JPTaVamj2UXQ52HzopeR8pGZkpNQBLTP_Mb1wsrLqKxyp3iWVaStx9W9_j8', {
+        method: 'POST',
+        body: formData
+    });
+
+    if (response.ok) {
+        console.log('파일이 성공적으로 전송되었습니다.');
+    } else {
+        console.error('파일 전송 중 오류 발생:', response.status);
+    }
+};

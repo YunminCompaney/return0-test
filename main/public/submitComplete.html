@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시험 제출 완료</title>
+    <link rel="stylesheet" href="mainPage.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="completion-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="#4CAF50" opacity="0.2"/>
+                <path d="M9 12L11 14L15 10" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="9" stroke="#4CAF50" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <h1>제출이 완료되었습니다</h1>
+        <p>수고하셨습니다! 구월중학교 코딩동아리 기초학력평가 제출이 성공적으로 완료되었습니다.</p>
+
+        <div class="button-group">
+            <button class="btn" onclick="goToMain()">메인으로 돌아가기</button>
+        </div>
+    </div>
+
+    <script>
+        function goToMain() {
+            window.location.href = "mainPage.html"; // 메인 페이지로 이동
+        }
+
+        function checkResults() {
+            alert("결과 확인 페이지로 이동합니다!"); // 결과 확인 로직 추가 필요
+        }
+    </script>
+</body>
+
+</html>
