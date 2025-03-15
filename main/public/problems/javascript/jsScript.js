@@ -142,9 +142,9 @@ function handleSubmit(event) {
     const confirmation = confirm("제출하면 답안을 수정하실 수 없습니다. 제출하시겠습니까?");
     if (confirmation) {
         // 학번 입력 받기
-        const studentId = prompt("학번을 입력해주세요:");
+        const studentId = prompt("학번과 이름을 입력해주세요:");
         if (!studentId) {
-            alert("학번을 입력해야 제출할 수 있습니다.");
+            alert("학번과 이름을 입력해야 제출할 수 있습니다.");
             return;
         }
 
