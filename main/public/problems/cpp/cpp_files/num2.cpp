@@ -1,9 +1,7 @@
 #include <iostream>
-
 int main()
 {
-    int num;
-    std::cin >> num;
-    std::cout << "(" << num << ")" << std::endl;
-    return 0;
+    int x = 3;
+    int y = 4;
+    std::cout << x / y;
 }
